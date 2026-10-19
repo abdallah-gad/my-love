@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love ❤️</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0033 0%, #4a0e4e 50%, #8b0057 100%);
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .heart-bg {
+    position: fixed;
+    color: rgba(255, 105, 180, 0.18);
+    font-size: 30px;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-100px) scale(1.3); opacity: 0; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    color: #ffb3d9;
+    margin-bottom: 35px;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 20px rgba(255, 105, 180, 0.6); }
+    to   { text-shadow: 0 0 40px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 192, 203, 0.7); }
+  }
+
+  .love-words {
+    list-style: none;
+    margin-bottom: 30px;
+  }
+
+  .love-words li {
+    font-size: 1.4rem;
+    color: #ffe0f0;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border-radius: 15px;
+    background: rgba(255, 105, 180, 0.08);
+    border: 1px solid rgba(255, 105, 180, 0.25);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.9s forwards;
+    transition: all 0.3s ease;
+  }
+
+  .love-words li:hover {
+    background: rgba(255, 105, 180, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
+
+  .love-words li:nth-child(1) { animation-delay: 0.3s; }
+  .love-words li:nth-child(2) { animation-delay: 0.8s; }
+  .love-words li:nth-child(3) { animation-delay: 1.3s; }
+  .love-words li:nth-child(4) { animation-delay: 1.8s; }
+  .love-words li:nth-child(5) { animation-delay: 2.3s; }
+  .love-words li:nth-child(6) { animation-delay: 2.8s; }
+  .love-words li:nth-child(7) { animation-delay: 3.3s; }
+  .love-words li:nth-child(8) { animation-delay: 3.8s; }
+  .love-words li:nth-child(9) { animation-delay: 4.3s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .heart-icon {
+    font-size: 3rem;
+    display: inline-block;
+    animation: beat 1s infinite;
+    margin: 10px 0 20px;
+  }
+
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    25%      { transform: scale(1.25); }
+    50%      { transform: scale(1.1); }
+    75%      { transform: scale(1.25); }
+  }
+
+  /* زر الكتم - ثابت في الركن */
+  .mute-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 105, 180, 0.6);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    color: #ffb3d9;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .mute-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.9);
+  }
+
+  .mute-btn:active { transform: scale(0.9); }
+
+  audio { display: none; }
+
+  .footer {
+    margin-top: 30px;
+    color: #ffb3d9;
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  /* تنبيه صغير لو المتصفح منع التشغيل */
+  .tap-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 105, 180, 0.9);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    z-index: 100;
+    animation: pulse 1.5s infinite;
+    transition: opacity 0.5s;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50%      { transform: translateX(-50%) scale(1.05); }
+  }
+
+  .tap-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- زر الكتم -->
+<button class="mute-btn" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">🔊</button>
+
+<!-- تنبيه للمستخدم -->
+<div class="tap-hint" id="tapHint">🎵 اضغط في أي مكان لتشغيل الموسيقى</div>
+
+<div class="container">
+  <h1 class="title">❤️ To My Everything ❤️</h1>
+
+  <ul class="love-words">
+    <li>My soul</li>
+    <li>My life</li>
+    <li>My everything</li>
+    <li>My babyyyy girl</li>
+    <li>Soul of my soul</li>
+    <li>Daddy's heart</li>
+    <li>My soulmate</li>
+    <li>Love of my life</li>
+    <li>My warm hug</li>
+  </ul>
+
+  <div class="heart-icon">💖</div>
+
+  <p class="footer">Made with ❤️ just for you</p>
+</div>
+
+<!-- ضع ملف الصوت بتاعك هنا وسميه love.mp3 -->
+<audio id="bgAudio" loop>
+  <source src="love.mp3" type="audio/mpeg">
+  Your browser does not support audio.
+</audio>
+
+<script>
+  // ===== قلوب متحركة =====
+  const hearts = ['❤️', '💕', '💖', '💗', '💓', '🌹'];
+  for (let i = 0; i < 25; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-bg';
+    h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (15 + Math.random() * 30) + 'px';
+    h.style.animationDuration = (8 + Math.random() * 10) + 's';
+    h.style.animationDelay = (Math.random() * 10) + 's';
+    document.body.appendChild(h);
+  }
+
+  // ===== الصوت =====
+  const audio = document.getElementById('bgAudio');
+  const muteBtn = document.getElementById('muteBtn');
+  const tapHint = document.getElementById('tapHint');
+  let started = false;
+  let muted = false;
+
+  audio.volume = 0.7;
+
+  // محاولة التشغيل التلقائي فوراً
+  function tryAutoPlay() {
+    audio.play().then(() => {
+      started = true;
+      tapHint.classList.add('hidden');
+    }).catch(() => {
+      // المتصفح منع - هنستنى أول تفاعل من المستخدم
+    });
+  }
+
+  // تشغيل عند أول تفاعل (كليك / لمس / ضغطة كيبورد)
+  function startOnInteraction() {
+    if (started) return;
+    audio.play().then(() => {
+      started = true;
+      tapHint.classList.add('hidden');
+    }).catch(() => {});
+  }
+
+  // نحاول التشغيل التلقائي أول ما الصفحة تفتح
+  window.addEventListener('load', tryAutoPlay);
+
+  // أول تفاعل من المستخدم يشغل الصوت
+  ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+    document.addEventListener(evt, startOnInteraction, { once: false });
+  });
+
+  // ===== زر الكتم =====
+  function toggleMute() {
+    muted = !muted;
+    audio.muted = muted;
+    muteBtn.textContent = muted ? '🔇' : '🔊';
+  }
+</script>
+
+</body>
+</html>
